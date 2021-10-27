@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ASP_NET_CORE_MANY_TO_MANY_CRUD.Models.Book>
+
+@{
+    ViewData["Title"] = "BookList";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2>Book List</h2>
+        </div>
+
+        <div class="col-4">
+            <a asp-action="Create" class="btn btn-primary text-white float-right">Create New Book</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped border">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BookName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BookType)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookType)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit","Edit",new {id=item.BookId }, new { @class = "btn btn-info"}) |
+                                @Html.ActionLink("Detele", "Detele", new {id = item.BookId }, new { @class = "btn btn-danger", onclick = "return confirm(''Do you want to delete')" }) @*some Question*@
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

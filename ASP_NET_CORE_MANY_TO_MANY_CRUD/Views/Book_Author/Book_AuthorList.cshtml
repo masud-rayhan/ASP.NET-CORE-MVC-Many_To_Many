@@ -1,0 +1,62 @@
+﻿@*@model List<ASP_NET_CORE_MANY_TO_MANY_CRUD.Models.Book_Author>*@
+@model IEnumerable<ASP_NET_CORE_MANY_TO_MANY_CRUD.Models.book_author_datapass>
+
+
+@{
+    ViewData["Title"] = "Book_AuthorList";
+}
+
+<h1>Book_AuthotList</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-info text-white float-right">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Book Name
+            </th>
+            <th>
+                Book Type
+            </th>
+            <th>
+                Author Name
+            </th>
+            <th>
+                Mail
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorMail)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id },new { @class="btn btn-primary text-white"}) |
+                    
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", onclick = "return confirm(''Do you want to delete')" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
