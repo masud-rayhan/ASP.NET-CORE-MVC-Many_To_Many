@@ -1,5 +1,6 @@
 ﻿using ASP_NET_CORE_MANY_TO_MANY_CRUD.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,22 @@ namespace ASP_NET_CORE_MANY_TO_MANY_CRUD.Controllers
         {
             try
             {
-                var book_author = from b in _db.Books
-                                      join ba in _db.Book_Authors on b.BookId equals ba.BookId
-                                      join a in _db.Authors on ba.AuthorId equals a.AuthorId
+                //var book_author = from b in _db.Books
+                //                      join ba in _db.Book_Authors on b.BookId equals ba.BookId
+                //                      join a in _db.Authors on ba.AuthorId equals a.AuthorId
 
-                                      select new book_author_datapass
-                                      {
-                                          Id = ba.Id,
-                                          BookName = ba.Book.BookName,
-                                          BookType = ba.Book.BookType,
-                                          AuthorName = ba.Author.AuthorName,
-                                          AuthorMail = ba.Author.Mail
-                                      };
+                //                      select new book_author_datapass
+                //                      {
+                //                          Id = ba.Id,
+                //                          BookName = ba.Book.BookName,
+                //                          BookType = ba.Book.BookType,
+                //                          AuthorName = ba.Author.AuthorName,
+                //                          AuthorMail = ba.Author.Mail
+                //                      };
+
+                var book_author = _db.Book_Authors
+                    .Include(b => b.Book)
+                    .Include(a => a.Author);
 
 
 
